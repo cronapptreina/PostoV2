@@ -36,7 +36,7 @@ public class Abastecimento implements Serializable {
   /**
   * @generated
   */
-  @Temporal(TemporalType.TIMESTAMP)
+  @Temporal(TemporalType.DATE)
   @Column(name = "data", nullable = true, unique = false, insertable=true, updatable=true)
   
   private java.util.Date data = new Date();

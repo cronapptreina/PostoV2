@@ -112,5 +112,6 @@
   "BestValue": "Best Value for your Car",
   "UpdateProfile": "Change Profile",
   "UserFullName": "Full name of the User",
-  "UserPhoto": "Photo of the User"
+  "UserPhoto": "Photo of the User",
+  "SuplyData": "Supplies by Date"
 }

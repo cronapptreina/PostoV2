@@ -45,6 +45,21 @@ public interface AbastecimentoDAO extends JpaRepository<Abastecimento, java.lang
 
 
 
+    
+  /**
+   * Searchable fields - General search (Only strings fields)
+   * @generated
+   */
+  @Query("SELECT entity FROM Abastecimento entity WHERE :search = :search")
+  public Page<Abastecimento> generalSearch(@Param(value="search") java.lang.String search, Pageable pageable);
+
+  /**
+   * Searchable fields - Specific search
+   * @generated
+   */
+  @Query("SELECT entity FROM Abastecimento entity WHERE (:data is null OR entity.data = :data)")
+  public Page<Abastecimento> specificSearch(@Param(value="data") java.util.Date data, Pageable pageable);
+  
   /**
    * Foreign Key carro
    * @generated

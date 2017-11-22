@@ -918,7 +918,7 @@
       "name": "Abastecimento",
       "attributes": [
         "id:java.lang.String",
-        "data:java.sql.Timestamp",
+        "data:java.util.Date",
         "km:java.lang.Double",
         "valor:java.lang.Double",
         "precoLitro:java.lang.Double",
@@ -927,12 +927,12 @@
       ],
       "methods": [],
       "position": {
-        "x": 434,
-        "y": 308
+        "x": 517,
+        "y": 311
       },
       "size": {
-        "width": 196.546875,
-        "height": 162.625
+        "width": 183.84375,
+        "height": 162.1875
       },
       "angle": 0,
       "multitenantContextJsonIgnore": "false",
@@ -972,7 +972,7 @@
         },
         {
           "name": "data",
-          "type": "java.sql.Timestamp",
+          "type": "java.util.Date",
           "dbName": "data",
           "dbLength": "",
           "dbPrecision": "",
@@ -991,7 +991,7 @@
           "isUpdatable": true,
           "isEncryption": false,
           "referencedColumnName": "",
-          "isSearchable": false
+          "isSearchable": true
         },
         {
           "name": "km",
@@ -1139,9 +1139,9 @@
           "text": "id\ndata\nkm\nvalor\nprecoLitro\ncarro\nposto\n"
         },
         ".uml-class-attrs-value": {
-          "ref-x": 84.0625,
+          "ref-x": 83.90625,
           "font-size": 11,
-          "text": "java.lang.String\njava.sql.Timestamp\njava.lang.Double\njava.lang.Double\njava.lang.Double\nCarro\nPosto\n"
+          "text": "java.lang.String\njava.util.Date\njava.lang.Double\njava.lang.Double\njava.lang.Double\nCarro\nPosto\n"
         },
         ".uml-class-methods-text": {
           "fill": "#0066FF",
