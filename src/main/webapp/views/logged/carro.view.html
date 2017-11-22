@@ -88,25 +88,10 @@
             <label for="textinput-placa" class="">Placa</label>
             <input ng-model="Carro.active.placa" class="form-control" id="textinput-placa" placeholder="Placa" mask="AAA-9999" type="text">
           </div>
-        </div>
-        <div data-component="crn-textinput" id="crn-textinput-marca">
-          <div class="form-group">
-            <label for="textinput-marca" class="">Marca</label>
-            <input ng-model="Carro.active.marca" class="form-control" id="textinput-marca" placeholder="Marca" type="text">
-          </div>
-        </div>
-        <div data-component="crn-textinput" id="crn-textinput-modelo">
-          <div class="form-group">
-            <label for="textinput-modelo" class="">Modelo</label>
-            <input ng-model="Carro.active.modelo" class="form-control" id="textinput-modelo" placeholder="Modelo" type="text">
-          </div>
-        </div>
-        <div data-component="crn-textinput" id="crn-textinput-ano">
-          <div class="form-group">
-            <label for="textinput-ano" class="">Ano</label>
-            <input ng-model="Carro.active.ano" class="form-control" id="textinput-ano" placeholder="Ano" type="number">
-          </div>
-        </div>
+        </div><div class="component-holder ng-binding ng-scope" data-component="crn-datasource" id="crn-datasource-110564"><datasource name="TabelaFIPEmarcas" entity="api/cronapi/query/1iuspdaox3cq9/" keys="id" rows-per-page="100" on-before-create="" on-after-create="" on-before-update="" on-after-update="" on-before-delete="" on-after-delete="" on-after-fill=""></datasource></div><div class="component-holder ng-binding ng-scope" data-component="crn-combobox-dynamic" id="crn-combobox-dynamic-298710"><div class="form-group"><label for="">Marca</label><ui-select crn-datasource="TabelaFIPEmarcas" ng-model="Carro.active.marca.fipe_name" ng-disabled="disabled" theme="bootstrap" class="crn-select"><ui-select-match placeholder="Select..." class="">{{$select.selected.fipe_name}}</ui-select-match><ui-select-choices repeat="rowData as rowData in datasource.data | filter : $select.search" class="" refresh="" refresh-deplay=""><div class="">{{rowData.fipe_name}}</div></ui-select-choices></ui-select></div></div><div class="component-holder ng-binding ng-scope" data-component="crn-datasource" id="crn-datasource-997312"><datasource name="Tabela FIPEModelos" entity="api/cronapi/query/ts4qpk1i1anr/{{Carro.active.marca}}/" keys="id" rows-per-page="100" on-before-create="" on-after-create="" on-before-update="" on-after-update="" on-before-delete="" on-after-delete="" on-after-fill="" dependent-by="{{}}"></datasource></div><div class="component-holder ng-binding ng-scope" data-component="crn-combobox-dynamic" id="crn-combobox-dynamic-85839"><div class="form-group"><label for="">Modelo</label><ui-select crn-datasource="Tabela FIPEModelos" ng-model="Carro.active.modelo" ng-disabled="disabled" theme="bootstrap" class="crn-select"><ui-select-match placeholder="Select..." class="">{{$select.selected.fipe_name}}</ui-select-match><ui-select-choices repeat="rowData as rowData in datasource.data | filter : $select.search" class="" refresh="" refresh-deplay=""><div class="">{{rowData.fipe_name}}</div></ui-select-choices></ui-select></div></div><div class="component-holder ng-binding ng-scope" data-component="crn-datasource" id="crn-datasource-133246"><datasource name="TabelaFIPE" entity="api/cronapi/query/1jezdh8mx6h4j/{{Carro.active.marca}}/{{Carro.active.modelo}}/" keys="id" rows-per-page="100" on-before-create="" on-after-create="" on-before-update="" on-after-update="" on-before-delete="" on-after-delete="" on-after-fill="" dependent-by="{{}}" filter=""></datasource></div><div class="component-holder ng-binding ng-scope" data-component="crn-combobox-dynamic" id="crn-combobox-dynamic-535361"><div class="form-group"><label for="">Ano</label><ui-select crn-datasource="TabelaFIPE" ng-model="Carro.active.ano" ng-disabled="disabled" theme="bootstrap" class="crn-select"><ui-select-match placeholder="Select..." class="">{{$select.selected.fipe_ano}}</ui-select-match><ui-select-choices repeat="rowData as rowData in datasource.data | filter : $select.search" class="" refresh="" refresh-deplay=""><div class="">{{rowData.fipe_ano}}</div></ui-select-choices></ui-select></div></div><div class="component-holder ng-binding ng-scope" data-component="crn-datasource" id="crn-datasource-321328"></div>
+        
+        
+        
         
         
         <!-- NtoN  -->

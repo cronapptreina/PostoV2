@@ -2,18 +2,17 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="app" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <jta-data-source>java:comp/env/jdbc/PostoV21</jta-data-source>
+        <non-jta-data-source>java:comp/env/jdbc/PostoV21</non-jta-data-source>
+        <class>app.entity.Marca</class>
+        <class>app.entity.Carro</class>
+        <class>app.entity.Ano</class>
         <class>app.entity.Abastecimento</class>
         <class>app.entity.User</class>
-        <class>app.entity.Posto</class>
-        <class>app.entity.Carro</class>
         <class>app.entity.Role</class>
+        <class>app.entity.Modelo</class>
+        <class>app.entity.Posto</class>
         <properties>
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://rds-oncronos-shared.cx8gelec2ybx.us-east-1.rds.amazonaws.com:3306/11400c45-eb92-4e63-a897-0dace84d8e29"/>
-            <property name="javax.persistence.jdbc.user" value="11400p45ro924r63"/>
-            <property name="javax.persistence.jdbc.password" value="3n8970qnpr84q8r2"/>
-            <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
         </properties>
     </persistence-unit>
 </persistence>

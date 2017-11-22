@@ -43,31 +43,34 @@ public class Carro implements Serializable {
   /**
   * @generated
   */
-  @Column(name = "marca", nullable = true, unique = false, insertable=true, updatable=true)
+  @ManyToOne
+  @JoinColumn(name="fk_user", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
   
-  private java.lang.String marca;
-
-  /**
-  * @generated
-  */
-  @Column(name = "modelo", nullable = true, unique = false, insertable=true, updatable=true)
-  
-  private java.lang.String modelo;
-
-  /**
-  * @generated
-  */
-  @Column(name = "ano", nullable = true, unique = false, insertable=true, updatable=true)
-  
-  private java.lang.Integer ano;
+  private User user;
 
   /**
   * @generated
   */
   @ManyToOne
-  @JoinColumn(name="fk_user", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
+  @JoinColumn(name="fk_marca", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
   
-  private User user;
+  private Marca marca;
+
+  /**
+  * @generated
+  */
+  @ManyToOne
+  @JoinColumn(name="fk_modelo", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
+  
+  private Modelo modelo;
+
+  /**
+  * @generated
+  */
+  @ManyToOne
+  @JoinColumn(name="fk_ano", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
+  
+  private Ano ano;
 
   /**
    * Construtor
@@ -118,66 +121,6 @@ public class Carro implements Serializable {
   }
 
   /**
-   * Obtém marca
-   * return marca
-   * @generated
-   */
-  
-  public java.lang.String getMarca(){
-    return this.marca;
-  }
-
-  /**
-   * Define marca
-   * @param marca marca
-   * @generated
-   */
-  public Carro setMarca(java.lang.String marca){
-    this.marca = marca;
-    return this;
-  }
-
-  /**
-   * Obtém modelo
-   * return modelo
-   * @generated
-   */
-  
-  public java.lang.String getModelo(){
-    return this.modelo;
-  }
-
-  /**
-   * Define modelo
-   * @param modelo modelo
-   * @generated
-   */
-  public Carro setModelo(java.lang.String modelo){
-    this.modelo = modelo;
-    return this;
-  }
-
-  /**
-   * Obtém ano
-   * return ano
-   * @generated
-   */
-  
-  public java.lang.Integer getAno(){
-    return this.ano;
-  }
-
-  /**
-   * Define ano
-   * @param ano ano
-   * @generated
-   */
-  public Carro setAno(java.lang.Integer ano){
-    this.ano = ano;
-    return this;
-  }
-
-  /**
    * Obtém user
    * return user
    * @generated
@@ -194,6 +137,66 @@ public class Carro implements Serializable {
    */
   public Carro setUser(User user){
     this.user = user;
+    return this;
+  }
+
+  /**
+   * Obtém marca
+   * return marca
+   * @generated
+   */
+  
+  public Marca getMarca(){
+    return this.marca;
+  }
+
+  /**
+   * Define marca
+   * @param marca marca
+   * @generated
+   */
+  public Carro setMarca(Marca marca){
+    this.marca = marca;
+    return this;
+  }
+
+  /**
+   * Obtém modelo
+   * return modelo
+   * @generated
+   */
+  
+  public Modelo getModelo(){
+    return this.modelo;
+  }
+
+  /**
+   * Define modelo
+   * @param modelo modelo
+   * @generated
+   */
+  public Carro setModelo(Modelo modelo){
+    this.modelo = modelo;
+    return this;
+  }
+
+  /**
+   * Obtém ano
+   * return ano
+   * @generated
+   */
+  
+  public Ano getAno(){
+    return this.ano;
+  }
+
+  /**
+   * Define ano
+   * @param ano ano
+   * @generated
+   */
+  public Carro setAno(Ano ano){
+    this.ano = ano;
     return this;
   }
 

@@ -1,0 +1,136 @@
+package blockly;
+
+import cronapi.*;
+import cronapi.rest.security.CronappSecurity;
+import java.util.concurrent.Callable;
+
+@CronapiMetaData(type = "blockly")
+@CronappSecurity
+public class TabelaFIPE {
+
+	public static final int TIMEOUT = 300;
+
+	/**
+	 *
+	 * @param marcaO
+	 * @param modeloO
+	 * @return Var
+	 */
+	// tabelaFIPE
+	public static Var anos(Var marcaO, Var modeloO) throws Exception {
+		return new Callable<Var>() {
+
+			private Var marcaId = Var.VAR_NULL;
+			private Var modeloId = Var.VAR_NULL;
+			private Var url = Var.VAR_NULL;
+			private Var consultaAnos = Var.VAR_NULL;
+			private Var exception = Var.VAR_NULL;
+
+			public Var call() throws Exception {
+				System.out.println(marcaO.getObjectAsString());
+				System.out.println(modeloO.getObjectAsString());
+				marcaId = cronapi.json.Operations.getJsonOrMapField(cronapi.json.Operations.toJson(marcaO),
+						Var.valueOf("id"));
+				modeloId = cronapi.json.Operations.getJsonOrMapField(cronapi.json.Operations.toJson(modeloO),
+						Var.valueOf("id"));
+				try {
+					url = Var.valueOf(Var.valueOf("http://fipeapi.appspot.com/api/1/carros/veiculos/").toString()
+							+ marcaId.toString() + Var.valueOf("/").toString() + modeloId.toString()
+							+ Var.valueOf(".json").toString());
+					System.out.println(url.getObjectAsString());
+					consultaAnos = cronapi.json.Operations.toJson(cronapi.util.Operations.getURLFromOthers(
+							Var.valueOf("GET"), Var.valueOf("application/json"), url, Var.VAR_NULL, Var.VAR_NULL));
+					System.out.println(consultaAnos.getObjectAsString());
+				} catch (Exception exception_exception) {
+					exception = Var.valueOf(exception_exception);
+					consultaAnos = cronapi.json.Operations.createObjectJson();
+					cronapi.util.Operations.callClientFunction(Var.valueOf("cronapi.screen.notify"),
+							Var.valueOf("success"), Var.valueOf(
+									"Não foi possivel obter dados da tabela FIPE. Favor digitar o ano manualmente"));
+				} finally {
+				}
+				return consultaAnos;
+			}
+		}.call();
+	}
+
+	/**
+	 *
+	 * @return Var
+	 */
+	// tabelaFIPE
+	public static Var marcas() throws Exception {
+		return new Callable<Var>() {
+
+			private Var marcaO = Var.VAR_NULL;
+			private Var modeloO = Var.VAR_NULL;
+			private Var marcaId = Var.VAR_NULL;
+			private Var modeloId = Var.VAR_NULL;
+			private Var url = Var.VAR_NULL;
+			private Var consultaAnos = Var.VAR_NULL;
+			private Var exception = Var.VAR_NULL;
+			private Var consultamodelos = Var.VAR_NULL;
+			private Var consultamarcas = Var.VAR_NULL;
+
+			public Var call() throws Exception {
+				try {
+					consultamarcas = cronapi.json.Operations.toJson(cronapi.util.Operations.getURLFromOthers(
+							Var.valueOf("GET"), Var.valueOf("application/json"),
+							Var.valueOf("http://fipeapi.appspot.com/api/1/carros/marcas.json"), Var.VAR_NULL,
+							Var.VAR_NULL));
+					System.out.println(consultamarcas.getObjectAsString());
+				} catch (Exception exception_exception) {
+					exception = Var.valueOf(exception_exception);
+					consultamarcas = cronapi.json.Operations.createObjectJson();
+					cronapi.util.Operations.callClientFunction(Var.valueOf("cronapi.screen.notify"),
+							Var.valueOf("success"), Var.valueOf(
+									"Não foi possivel obter dados da tabela FIPE. Favor digitar a marca manualmente"));
+				} finally {
+				}
+				return consultamarcas;
+			}
+		}.call();
+	}
+
+	/**
+	 *
+	 * @param marcaO
+	 * @return Var
+	 */
+	// tabelaFIPE
+	public static Var modelos(Var marcaO) throws Exception {
+		return new Callable<Var>() {
+
+			private Var modeloO = Var.VAR_NULL;
+			private Var marcaId = Var.VAR_NULL;
+			private Var modeloId = Var.VAR_NULL;
+			private Var url = Var.VAR_NULL;
+			private Var consultaAnos = Var.VAR_NULL;
+			private Var exception = Var.VAR_NULL;
+			private Var consultamodelos = Var.VAR_NULL;
+
+			public Var call() throws Exception {
+				System.out.println(marcaO.getObjectAsString());
+				marcaId = cronapi.json.Operations.getJsonOrMapField(cronapi.json.Operations.toJson(marcaO),
+						Var.valueOf("id"));
+				try {
+					url = Var.valueOf(Var.valueOf("http://fipeapi.appspot.com/api/1/carros/veiculos/").toString()
+							+ marcaId.toString() + Var.valueOf(".json").toString());
+					System.out.println(url.getObjectAsString());
+					consultamodelos = cronapi.json.Operations.toJson(cronapi.util.Operations.getURLFromOthers(
+							Var.valueOf("GET"), Var.valueOf("application/json"), url, Var.VAR_NULL, Var.VAR_NULL));
+					System.out.println(consultamodelos.getObjectAsString());
+				} catch (Exception exception_exception) {
+					exception = Var.valueOf(exception_exception);
+					consultamodelos = cronapi.json.Operations.createObjectJson();
+					cronapi.util.Operations.callClientFunction(Var.valueOf("cronapi.screen.notify"),
+							Var.valueOf("success"), Var.valueOf(
+									"Não foi possivel obter dados da tabela FIPE. Favor digitar o modelo manualmente"));
+				} finally {
+				}
+				return consultamodelos;
+			}
+		}.call();
+	}
+
+}

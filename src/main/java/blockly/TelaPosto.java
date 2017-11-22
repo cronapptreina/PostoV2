@@ -37,7 +37,7 @@ public class TelaPosto {
 						cronapi.json.Operations.getJsonOrMapField(dadosCEP, Var.valueOf("bairro")));
 				cronapi.util.Operations.callClientFunction(Var.valueOf("cronapi.screen.changeValueOfField"),
 						Var.valueOf("Posto.active.cidade"),
-						cronapi.json.Operations.getJsonOrMapField(dadosCEP, Var.valueOf("cidade")));
+						cronapi.json.Operations.getJsonOrMapField(dadosCEP, Var.valueOf("localidade")));
 				cronapi.util.Operations.callClientFunction(Var.valueOf("cronapi.screen.changeValueOfField"),
 						Var.valueOf("Posto.active.uf"),
 						cronapi.json.Operations.getJsonOrMapField(dadosCEP, Var.valueOf("uf")));

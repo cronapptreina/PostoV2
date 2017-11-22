@@ -44,6 +44,20 @@ public interface CarroDAO extends JpaRepository<Carro, java.lang.String> {
   public void delete(@Param(value="id") java.lang.String id);
 
 
+      
+  /**
+   * OneToMany Relation - Searchable fields - General search (Only strings fields)
+   * @generated
+   */
+  @Query("SELECT entity FROM Abastecimento entity WHERE entity.carro.id = :id AND (:search = :search)")
+  public Page<Abastecimento> findAbastecimentoGeneralSearch(@Param(value="search") java.lang.String search, @Param(value="id") java.lang.String id, Pageable pageable);
+
+  /** 
+   * OneToMany Relation - Searchable fields - Specific search
+   * @generated
+   */
+  @Query("SELECT entity FROM Abastecimento entity WHERE entity.carro.id = :id AND (:data is null OR entity.data = :data)")
+  public Page<Abastecimento> findAbastecimentoSpecificSearch(@Param(value="id") java.lang.String id, @Param(value="data") java.util.Date data, Pageable pageable);
 
   /**
    * OneToMany Relation
@@ -72,5 +86,26 @@ public interface CarroDAO extends JpaRepository<Carro, java.lang.String> {
    */
   @Query("SELECT entity FROM Carro entity WHERE entity.user.id = :id")
   public Page<Carro> findCarrosByUser(@Param(value="id") java.lang.String id, Pageable pageable);
+
+  /**
+   * Foreign Key marca
+   * @generated
+   */
+  @Query("SELECT entity FROM Carro entity WHERE entity.marca.id = :id")
+  public Page<Carro> findCarrosByMarca(@Param(value="id") java.lang.Integer id, Pageable pageable);
+
+  /**
+   * Foreign Key modelo
+   * @generated
+   */
+  @Query("SELECT entity FROM Carro entity WHERE entity.modelo.id = :id")
+  public Page<Carro> findCarrosByModelo(@Param(value="id") java.lang.Integer id, Pageable pageable);
+
+  /**
+   * Foreign Key ano
+   * @generated
+   */
+  @Query("SELECT entity FROM Carro entity WHERE entity.ano.id = :id")
+  public Page<Carro> findCarrosByAno(@Param(value="id") java.lang.String id, Pageable pageable);
 
 }

@@ -52,6 +52,12 @@
                 <configuration>
                     <warSourceDirectory>src/main/webapp</warSourceDirectory>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webResources>
+                        <resource>
+                            <directory>config</directory>
+                            <targetPath>META-INF</targetPath>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
         </plugins>
@@ -194,9 +200,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.cronospass.resource mimetype="folder/libs">lib</project.cronospass.resource>
         <project.cronospass.resource mimetype="folder/servercontext">config</project.cronospass.resource>
         <project.cronospass.resource mimetype="folder/src">src/main/java</project.cronospass.resource>
         <project.cronospass.resource mimetype="folder/web">src/main/webapp</project.cronospass.resource>
-        <project.cronospass.resource mimetype="folder/libs">lib</project.cronospass.resource>
     </properties>
 </project>

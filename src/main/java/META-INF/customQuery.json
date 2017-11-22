@@ -585,5 +585,249 @@
 			"foreignKey": null
 		},
 		"serviceUrl": "api/cronapi/query/soejwz0u63p2/"
+	},
+	"1iuspdaox3cq9": {
+		"customId": "tabelaFIPEmarcas",
+		"queryName": "tabelaFIPEmarcas",
+		"screen": "src/main/webapp/views/logged/carro.view.html",
+		"sourceType": "blockly",
+		"blockly": {
+			"blocklyClass": "blockly.TabelaFIPE",
+			"blocklyMethod": "marcas",
+			"blocklyLanguage": "java",
+			"blocklyJson": {
+				"namespace": "blockly.TabelaFIPE",
+				"classNameNew": "TabelaFIPE",
+				"classNameOld": "tabelaFIPE",
+				"sourcePath": "src/main/java/blockly/tabelaFIPE.blockly",
+				"language": "java",
+				"class": "blockly.TabelaFIPE",
+				"methods": [
+					{
+						"name": "modelos",
+						"hasReturn": "true",
+						"params": [
+							"id"
+						]
+					},
+					{
+						"name": "marcas",
+						"hasReturn": "true",
+						"params": []
+					}
+				]
+			},
+			"blocklyFunctionCall": "cronapi.util.makeCallServerBlocklyAsync('blockly.TabelaFIPE:marcas', null, null)",
+			"blocklyGETMethod": "marcas",
+			"blocklyPOSTMethod": "marcas",
+			"blocklyPUTMethod": "marcas",
+			"blocklyDELETEMethod": "marcas",
+			"blocklyFILTERMethod": "marcas"
+		},
+		"entitySimpleName": null,
+		"entityFullName": null,
+		"query": "",
+		"queryParamsValues": [],
+		"verbs": {
+			"GET": true,
+			"GETAuthorities": null,
+			"POST": true,
+			"POSTAuthorities": null,
+			"PUT": true,
+			"PUTAuthorities": null,
+			"DELETE": true,
+			"DELETEAuthorities": null,
+			"FILTER": true,
+			"FILTERAuthorities": null
+		},
+		"events": {
+			"beforeInsert": null,
+			"beforeUpdate": null,
+			"beforeDelete": null,
+			"afterInsert": null,
+			"afterUpdate": null,
+			"afterDelete": null,
+			"onNavigate": null,
+			"onGetData": null
+		},
+		"defaultValues": {},
+		"security": {},
+		"calcFields": {},
+		"calcFieldsSecurity": {},
+		"errorHandles": {
+			"primaryKey": null,
+			"foreignKey": null
+		},
+		"serviceUrl": "api/cronapi/query/1iuspdaox3cq9/"
+	},
+	"ts4qpk1i1anr": {
+		"customId": "tabelaFIPEmodelos",
+		"queryName": "tabelaFIPEmodelos",
+		"screen": "src/main/webapp/views/logged/carro.view.html",
+		"sourceType": "blockly",
+		"blockly": {
+			"blocklyClass": "blockly.TabelaFIPE",
+			"blocklyMethod": "modelos",
+			"blocklyLanguage": "java",
+			"blocklyJson": {
+				"namespace": "blockly.TabelaFIPE",
+				"classNameNew": "TabelaFIPE",
+				"classNameOld": "tabelaFIPE",
+				"sourcePath": "src/main/java/blockly/tabelaFIPE.blockly",
+				"language": "java",
+				"class": "blockly.TabelaFIPE",
+				"methods": [
+					{
+						"name": "modelos",
+						"hasReturn": "true",
+						"params": [
+							"marcaO"
+						]
+					},
+					{
+						"name": "marcas",
+						"hasReturn": "true",
+						"params": []
+					}
+				]
+			},
+			"blocklyFunctionCall": "cronapi.util.makeCallServerBlocklyAsync('blockly.TabelaFIPE:modelos', null, null)",
+			"blocklyGETMethod": "modelos",
+			"blocklyPOSTMethod": "modelos",
+			"blocklyPUTMethod": "modelos",
+			"blocklyDELETEMethod": "modelos",
+			"blocklyFILTERMethod": "modelos"
+		},
+		"entitySimpleName": null,
+		"entityFullName": null,
+		"query": "",
+		"queryParamsValues": [
+			{
+				"fieldName": "marcaO",
+				"fieldValue": "Carro.active.marca"
+			}
+		],
+		"verbs": {
+			"GET": true,
+			"GETAuthorities": null,
+			"POST": true,
+			"POSTAuthorities": null,
+			"PUT": true,
+			"PUTAuthorities": null,
+			"DELETE": true,
+			"DELETEAuthorities": null,
+			"FILTER": true,
+			"FILTERAuthorities": null
+		},
+		"events": {
+			"beforeInsert": null,
+			"beforeUpdate": null,
+			"beforeDelete": null,
+			"afterInsert": null,
+			"afterUpdate": null,
+			"afterDelete": null,
+			"onNavigate": null,
+			"onGetData": null
+		},
+		"defaultValues": {},
+		"security": {},
+		"calcFields": {},
+		"calcFieldsSecurity": {},
+		"errorHandles": {
+			"primaryKey": null,
+			"foreignKey": null
+		},
+		"serviceUrl": "api/cronapi/query/ts4qpk1i1anr/{{Carro.active.marca}}/"
+	},
+	"1jezdh8mx6h4j": {
+		"customId": "tabelaFIPEanos",
+		"queryName": "TabelaFIPEanos",
+		"screen": "src/main/webapp/views/logged/carro.view.html",
+		"sourceType": "blockly",
+		"blockly": {
+			"blocklyClass": "blockly.TabelaFIPE",
+			"blocklyMethod": "anos",
+			"blocklyLanguage": "java",
+			"blocklyJson": {
+				"namespace": "blockly.TabelaFIPE",
+				"classNameNew": "TabelaFIPE",
+				"classNameOld": "tabelaFIPE",
+				"sourcePath": "src/main/java/blockly/tabelaFIPE.blockly",
+				"language": "java",
+				"class": "blockly.TabelaFIPE",
+				"methods": [
+					{
+						"name": "anos",
+						"hasReturn": "true",
+						"params": [
+							"marcaO",
+							"modeloO"
+						]
+					},
+					{
+						"name": "modelos",
+						"hasReturn": "true",
+						"params": [
+							"marcaO"
+						]
+					},
+					{
+						"name": "marcas",
+						"hasReturn": "true",
+						"params": []
+					}
+				]
+			},
+			"blocklyFunctionCall": "cronapi.util.makeCallServerBlocklyAsync('blockly.TabelaFIPE:anos', null, null)",
+			"blocklyGETMethod": "anos",
+			"blocklyPOSTMethod": "anos",
+			"blocklyPUTMethod": "anos",
+			"blocklyDELETEMethod": "anos",
+			"blocklyFILTERMethod": "anos"
+		},
+		"entitySimpleName": null,
+		"entityFullName": null,
+		"query": "",
+		"queryParamsValues": [
+			{
+				"fieldName": "marcaO",
+				"fieldValue": "Carro.active.marca"
+			},
+			{
+				"fieldName": "modeloO",
+				"fieldValue": "Carro.active.modelo"
+			}
+		],
+		"verbs": {
+			"GET": true,
+			"GETAuthorities": null,
+			"POST": true,
+			"POSTAuthorities": null,
+			"PUT": true,
+			"PUTAuthorities": null,
+			"DELETE": true,
+			"DELETEAuthorities": null,
+			"FILTER": true,
+			"FILTERAuthorities": null
+		},
+		"events": {
+			"beforeInsert": null,
+			"beforeUpdate": null,
+			"beforeDelete": null,
+			"afterInsert": null,
+			"afterUpdate": null,
+			"afterDelete": null,
+			"onNavigate": null,
+			"onGetData": null
+		},
+		"defaultValues": {},
+		"security": {},
+		"calcFields": {},
+		"calcFieldsSecurity": {},
+		"errorHandles": {
+			"primaryKey": null,
+			"foreignKey": null
+		},
+		"serviceUrl": "api/cronapi/query/1jezdh8mx6h4j/{{Carro.active.marca}}/{{Carro.active.modelo}}/"
 	}
 }
