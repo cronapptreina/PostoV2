@@ -449,7 +449,7 @@
         "user:User",
         "marca:Marca",
         "modelo:Modelo",
-        "ano:Ano"
+        "ano:java.lang.Integer"
       ],
       "methods": [],
       "position": {
@@ -457,7 +457,7 @@
         "y": 43
       },
       "size": {
-        "width": 163.875,
+        "width": 170.71875,
         "height": 151.27445220947266
       },
       "angle": 0,
@@ -508,7 +508,7 @@
           "mask": "AAA-9999",
           "isPrimaryKey": false,
           "isUniqueKey": false,
-          "isNullable": true,
+          "isNullable": false,
           "pkType": "",
           "multitenantContext": "",
           "jsonIgnore": false,
@@ -531,7 +531,7 @@
           "mask": "",
           "isPrimaryKey": false,
           "isUniqueKey": false,
-          "isNullable": true,
+          "isNullable": false,
           "pkType": "",
           "multitenantContext": "",
           "jsonIgnore": false,
@@ -546,15 +546,19 @@
           "name": "marca",
           "type": "Marca",
           "dbName": "fk_marca",
+          "dbLength": "",
+          "dbPrecision": "",
+          "dbScale": "",
+          "dbDefaultValue": "",
           "label": "",
           "mask": "",
           "isPrimaryKey": false,
           "isUniqueKey": false,
-          "isNullable": true,
-          "multitenantContext": "",
+          "isNullable": false,
           "pkType": "",
-          "isIgnore": false,
-          "isTransien": false,
+          "multitenantContext": "",
+          "jsonIgnore": false,
+          "isTransient": false,
           "isInsertable": true,
           "isUpdatable": true,
           "isEncryption": false,
@@ -565,15 +569,19 @@
           "name": "modelo",
           "type": "Modelo",
           "dbName": "fk_modelo",
+          "dbLength": "",
+          "dbPrecision": "",
+          "dbScale": "",
+          "dbDefaultValue": "",
           "label": "",
           "mask": "",
           "isPrimaryKey": false,
           "isUniqueKey": false,
-          "isNullable": true,
-          "multitenantContext": "",
+          "isNullable": false,
           "pkType": "",
-          "isIgnore": false,
-          "isTransien": false,
+          "multitenantContext": "",
+          "jsonIgnore": false,
+          "isTransient": false,
           "isInsertable": true,
           "isUpdatable": true,
           "isEncryption": false,
@@ -582,17 +590,21 @@
         },
         {
           "name": "ano",
-          "type": "Ano",
-          "dbName": "fk_ano",
-          "label": "",
+          "type": "java.lang.Integer",
+          "dbName": "ano",
+          "dbLength": "",
+          "dbPrecision": "",
+          "dbScale": "",
+          "dbDefaultValue": "",
+          "label": "Ano",
           "mask": "",
           "isPrimaryKey": false,
           "isUniqueKey": false,
-          "isNullable": true,
-          "multitenantContext": "",
+          "isNullable": false,
           "pkType": "",
-          "isIgnore": false,
-          "isTransien": false,
+          "multitenantContext": "",
+          "jsonIgnore": false,
+          "isTransient": false,
           "isInsertable": true,
           "isUpdatable": true,
           "isEncryption": false,
@@ -632,7 +644,7 @@
         ".uml-class-attrs-value": {
           "ref-x": 70.0625,
           "font-size": 11,
-          "text": "java.lang.String\njava.lang.String\nUser\nMarca\nModelo\nAno\n"
+          "text": "java.lang.String\njava.lang.String\nUser\nMarca\nModelo\njava.lang.Integer\n"
         },
         ".uml-class-methods-text": {
           "fill": "#0066FF",
@@ -1286,15 +1298,15 @@
       "name": "Marca",
       "attributes": [
         "id:java.lang.Integer",
-        "nome:java.lang.String"
+        "fipe_name:java.lang.String"
       ],
       "methods": [],
       "position": {
-        "x": 815,
-        "y": -2
+        "x": 740,
+        "y": 8
       },
       "size": {
-        "width": 162.171875,
+        "width": 187.015625,
         "height": 107.85416793823242
       },
       "angle": 0,
@@ -1334,18 +1346,18 @@
           "isSearchable": false
         },
         {
-          "name": "nome",
+          "name": "fipe_name",
           "type": "java.lang.String",
           "dbName": "nome",
           "dbLength": "",
           "dbPrecision": "",
           "dbScale": "",
           "dbDefaultValue": "",
-          "label": "Nome",
+          "label": "Fipe _name",
           "mask": "",
           "isPrimaryKey": false,
           "isUniqueKey": false,
-          "isNullable": true,
+          "isNullable": false,
           "pkType": "",
           "multitenantContext": "",
           "jsonIgnore": false,
@@ -1384,10 +1396,10 @@
         },
         ".uml-class-attrs-text": {
           "font-size": 11,
-          "text": "id\nnome\n"
+          "text": "id\nfipe_name\n"
         },
         ".uml-class-attrs-value": {
-          "ref-x": 61.515625,
+          "ref-x": 86.359375,
           "font-size": 11,
           "text": "java.lang.Integer\njava.lang.String\n"
         },
@@ -1403,15 +1415,15 @@
       "name": "Modelo",
       "attributes": [
         "id:java.lang.Integer",
-        "nome:java.lang.String"
+        "fipe_name:java.lang.String"
       ],
       "methods": [],
       "position": {
-        "x": 845,
-        "y": 113
+        "x": 743,
+        "y": 132
       },
       "size": {
-        "width": 162.171875,
+        "width": 187.015625,
         "height": 107.85416793823242
       },
       "angle": 0,
@@ -1451,14 +1463,14 @@
           "isSearchable": false
         },
         {
-          "name": "nome",
+          "name": "fipe_name",
           "type": "java.lang.String",
           "dbName": "nome",
           "dbLength": "",
           "dbPrecision": "",
           "dbScale": "",
           "dbDefaultValue": "",
-          "label": "Nome",
+          "label": "Fipe _name",
           "mask": "",
           "isPrimaryKey": false,
           "isUniqueKey": false,
@@ -1501,129 +1513,12 @@
         },
         ".uml-class-attrs-text": {
           "font-size": 11,
-          "text": "id\nnome\n"
+          "text": "id\nfipe_name\n"
         },
         ".uml-class-attrs-value": {
-          "ref-x": 61.515625,
+          "ref-x": 86.359375,
           "font-size": 11,
           "text": "java.lang.Integer\njava.lang.String\n"
-        },
-        ".uml-class-methods-text": {
-          "fill": "#0066FF",
-          "font-size": 11,
-          "text": ""
-        }
-      }
-    },
-    {
-      "type": "uml.Class",
-      "name": "Ano",
-      "attributes": [
-        "id:java.lang.String",
-        "nome:java.lang.String"
-      ],
-      "methods": [],
-      "position": {
-        "x": 632,
-        "y": 151
-      },
-      "size": {
-        "width": 155.328125,
-        "height": 107.85416793823242
-      },
-      "angle": 0,
-      "multitenantContextJsonIgnore": "false",
-      "multitenantContextIgnoreEntities": "",
-      "role": "Auto",
-      "queries": [],
-      "tableName": null,
-      "tableScheme": null,
-      "isRest": "true",
-      "multitenantContext": "",
-      "restSecurity": null,
-      "restPath": "",
-      "id": "c8b539a7-d484-421b-aa13-fe297b89d0b8",
-      "fields": [
-        {
-          "name": "id",
-          "type": "java.lang.String",
-          "dbName": "id",
-          "dbLength": "",
-          "dbPrecision": "",
-          "dbScale": "",
-          "dbDefaultValue": "UUID.randomUUID().toString().toUpperCase()",
-          "label": "Id",
-          "mask": "",
-          "isPrimaryKey": true,
-          "isUniqueKey": false,
-          "isNullable": false,
-          "pkType": "UUID",
-          "multitenantContext": "",
-          "jsonIgnore": false,
-          "isTransient": false,
-          "isInsertable": true,
-          "isUpdatable": true,
-          "isEncryption": false,
-          "referencedColumnName": "",
-          "isSearchable": false
-        },
-        {
-          "name": "nome",
-          "type": "java.lang.String",
-          "dbName": "nome",
-          "dbLength": "",
-          "dbPrecision": "",
-          "dbScale": "",
-          "dbDefaultValue": "",
-          "label": "Nome",
-          "mask": "",
-          "isPrimaryKey": false,
-          "isUniqueKey": false,
-          "isNullable": true,
-          "pkType": "",
-          "multitenantContext": "",
-          "jsonIgnore": false,
-          "isTransient": false,
-          "isInsertable": true,
-          "isUpdatable": true,
-          "isEncryption": false,
-          "referencedColumnName": "",
-          "isSearchable": false
-        }
-      ],
-      "runtimeClass": "cronos.widgets.joint.uml.Class",
-      "z": 20,
-      "attrs": {
-        "rect": {
-          "stroke": "yellow",
-          "stroke-width": 2
-        },
-        ".uml-class-name-rect": {
-          "height": 50,
-          "transform": "translate(0,0)"
-        },
-        ".uml-class-attrs-rect": {
-          "height": 70,
-          "transform": "translate(0,50)"
-        },
-        ".uml-class-methods-rect": {
-          "height": 30,
-          "transform": "translate(0,120)"
-        },
-        ".uml-class-name-text": {
-          "fill": "#000",
-          "font-size": 12,
-          "text": "Ano",
-          "font-weight": "bold"
-        },
-        ".uml-class-attrs-text": {
-          "font-size": 11,
-          "text": "id\nnome\n"
-        },
-        ".uml-class-attrs-value": {
-          "ref-x": 61.515625,
-          "font-size": 11,
-          "text": "java.lang.String\njava.lang.String\n"
         },
         ".uml-class-methods-text": {
           "fill": "#0066FF",
@@ -1715,48 +1610,6 @@
           "fill": "#cecece"
         }
       }
-    },
-    {
-      "type": "uml.Composition",
-      "relationFields": [
-        "ano:target"
-      ],
-      "name": null,
-      "id": "f7e5335e-e962-42f0-911e-5d9f2d839312",
-      "runtimeClass": "cronos.widgets.joint.arrow.OneToMany",
-      "target": {
-        "id": "259efa64-e9fe-406b-85f5-2b6a1415848d"
-      },
-      "source": {
-        "id": "c8b539a7-d484-421b-aa13-fe297b89d0b8"
-      },
-      "labels": [
-        {
-          "position": 0.9,
-          "attrs": {
-            "rect": {
-              "fill": "transparent"
-            },
-            "text": {
-              "text": "*",
-              "font-family": "Arial",
-              "font-size": "12px",
-              "fill": "#cecece"
-            }
-          }
-        }
-      ],
-      "z": 23,
-      "attrs": {
-        ".marker-target": {
-          "d": "",
-          "fill": ""
-        },
-        ".marker-source": {
-          "d": "M 40 10 L 20 20 L 0 10 L 20 0 z",
-          "fill": "#cecece"
-        }
-      }
     }
   ],
   "selectedGroup": "1d7f906f-a526-482d-aaf4-08d227ae8c18",
@@ -1779,7 +1632,6 @@
         "d2e50f97-0b9e-4037-94ba-af64568af247",
         "5d18b8eb-5b3b-47ca-b2aa-00eb2998a041",
         "1df87f56-c5ba-47f5-8e68-82931f49b989",
-        "c8b539a7-d484-421b-aa13-fe297b89d0b8",
         "259efa64-e9fe-406b-85f5-2b6a1415848d"
       ]
     }

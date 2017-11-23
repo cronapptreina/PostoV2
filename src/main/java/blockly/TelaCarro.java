@@ -16,6 +16,46 @@ public class TelaCarro {
 	 * @return Var
 	 */
 	// TelaCarro
+	public static Var antesInserir(Var Entidade) throws Exception {
+		return new Callable<Var>() {
+
+			public Var call() throws Exception {
+				System.out.println(Entidade.getObjectAsString());
+				System.out.println(cronapi.screen.Operations.getValueOfField(Var.valueOf("Carro.active.marca"))
+						.getObjectAsString());
+				System.out.println(cronapi.screen.Operations.getValueOfField(Var.valueOf("Carro.active.modelo"))
+						.getObjectAsString());
+				cronapi.database.Operations.insert(Var.valueOf("app.entity.Marca"),
+						Var.valueOf("fipe_name",
+								cronapi.screen.Operations.getValueOfField(Var.valueOf("Carro.active.marca.fipe_name"))),
+						Var.valueOf("id",
+								cronapi.json.Operations.getJsonOrMapField(
+										cronapi.screen.Operations.getValueOfField(Var.valueOf("Carro.active.marca")),
+										Var.valueOf("id"))));
+				cronapi.database.Operations.insert(Var.valueOf("app.entity.Modelo"),
+						Var.valueOf("fipe_name",
+								cronapi.json.Operations.getJsonOrMapField(
+										cronapi.screen.Operations.getValueOfField(Var.valueOf("Carro.active.modelo")),
+										Var.valueOf("id"))),
+						Var.valueOf("id",
+								cronapi.json.Operations.getJsonOrMapField(
+										cronapi.screen.Operations.getValueOfField(Var.valueOf("Carro.active.modelo")),
+										Var.valueOf("id"))));
+				cronapi.object.Operations.setObjectField(Entidade, Var.valueOf("marca"),
+						cronapi.screen.Operations.getValueOfField(Var.valueOf("Carro.active.marca")));
+				cronapi.object.Operations.setObjectField(Entidade, Var.valueOf("modelo"),
+						cronapi.screen.Operations.getValueOfField(Var.valueOf("Carro.active.modelo")));
+				return Var.VAR_NULL;
+			}
+		}.call();
+	}
+
+	/**
+	 *
+	 * @param Entidade
+	 * @return Var
+	 */
+	// TelaCarro
 	public static Var calculaConsumoMedioCarro(Var Entidade) throws Exception {
 		return new Callable<Var>() {
 

@@ -485,7 +485,36 @@
 			"FILTERAuthorities": null
 		},
 		"events": {
-			"beforeInsert": null,
+			"beforeInsert": {
+				"blocklyClass": "blockly.TelaCarro",
+				"blocklyMethod": "antesInserir",
+				"blocklyLanguage": "java",
+				"blocklyJson": {
+					"namespace": "blockly.TelaCarro",
+					"classNameNew": "TelaCarro",
+					"classNameOld": "TelaCarro",
+					"sourcePath": "src/main/java/blockly/TelaCarro.blockly",
+					"language": "java",
+					"class": "blockly.TelaCarro",
+					"methods": [
+						{
+							"name": "antesInserir",
+							"hasReturn": "true",
+							"params": [
+								"Entidade<app.entity.Carro>"
+							]
+						},
+						{
+							"name": "calculaConsumoMedioCarro",
+							"hasReturn": "true",
+							"params": [
+								"Entidade<app.entity.Carro>"
+							]
+						}
+					]
+				},
+				"blocklyFunctionCall": "cronapi.util.makeCallServerBlocklyAsync('blockly.TelaCarro:antesInserir', null, null)"
+			},
 			"beforeUpdate": null,
 			"beforeDelete": null,
 			"afterInsert": null,
@@ -497,9 +526,6 @@
 		"defaultValues": {
 			"id": null,
 			"placa": null,
-			"marca": null,
-			"modelo": null,
-			"ano": null,
 			"user": {
 				"blocklyClass": "blockly.Usuario",
 				"blocklyMethod": "obterUsuarioLogado",
@@ -530,15 +556,18 @@
 				"blocklyPUTMethod": null,
 				"blocklyDELETEMethod": null,
 				"blocklyFILTERMethod": null
-			}
+			},
+			"marca": null,
+			"modelo": null,
+			"ano": null
 		},
 		"security": {
 			"id": null,
 			"placa": null,
+			"user": null,
 			"marca": null,
 			"modelo": null,
-			"ano": null,
-			"user": null
+			"ano": null
 		},
 		"calcFields": {
 			"ConsumoMedioCarro": {

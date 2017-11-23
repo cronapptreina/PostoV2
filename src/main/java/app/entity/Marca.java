@@ -37,9 +37,9 @@ public class Marca implements Serializable {
   /**
   * @generated
   */
-  @Column(name = "nome", nullable = true, unique = false, insertable=true, updatable=true)
+  @Column(name = "nome", nullable = false, unique = false, insertable=true, updatable=true)
   
-  private java.lang.String nome;
+  private java.lang.String fipe_name;
 
   /**
    * Construtor
@@ -70,22 +70,22 @@ public class Marca implements Serializable {
   }
 
   /**
-   * Obtém nome
-   * return nome
+   * Obtém fipe_name
+   * return fipe_name
    * @generated
    */
   
-  public java.lang.String getNome(){
-    return this.nome;
+  public java.lang.String getFipe_name(){
+    return this.fipe_name;
   }
 
   /**
-   * Define nome
-   * @param nome nome
+   * Define fipe_name
+   * @param fipe_name fipe_name
    * @generated
    */
-  public Marca setNome(java.lang.String nome){
-    this.nome = nome;
+  public Marca setFipe_name(java.lang.String fipe_name){
+    this.fipe_name = fipe_name;
     return this;
   }
 

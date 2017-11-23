@@ -36,7 +36,7 @@ public class Carro implements Serializable {
   /**
   * @generated
   */
-  @Column(name = "placa", nullable = true, unique = false, insertable=true, updatable=true)
+  @Column(name = "placa", nullable = false, unique = false, insertable=true, updatable=true)
   
   private java.lang.String placa;
 
@@ -44,7 +44,7 @@ public class Carro implements Serializable {
   * @generated
   */
   @ManyToOne
-  @JoinColumn(name="fk_user", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
+  @JoinColumn(name="fk_user", nullable = false, referencedColumnName = "id", insertable=true, updatable=true)
   
   private User user;
 
@@ -52,7 +52,7 @@ public class Carro implements Serializable {
   * @generated
   */
   @ManyToOne
-  @JoinColumn(name="fk_marca", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
+  @JoinColumn(name="fk_marca", nullable = false, referencedColumnName = "id", insertable=true, updatable=true)
   
   private Marca marca;
 
@@ -60,17 +60,16 @@ public class Carro implements Serializable {
   * @generated
   */
   @ManyToOne
-  @JoinColumn(name="fk_modelo", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
+  @JoinColumn(name="fk_modelo", nullable = false, referencedColumnName = "id", insertable=true, updatable=true)
   
   private Modelo modelo;
 
   /**
   * @generated
   */
-  @ManyToOne
-  @JoinColumn(name="fk_ano", nullable = true, referencedColumnName = "id", insertable=true, updatable=true)
+  @Column(name = "ano", nullable = false, unique = false, insertable=true, updatable=true)
   
-  private Ano ano;
+  private java.lang.Integer ano;
 
   /**
    * Construtor
@@ -186,7 +185,7 @@ public class Carro implements Serializable {
    * @generated
    */
   
-  public Ano getAno(){
+  public java.lang.Integer getAno(){
     return this.ano;
   }
 
@@ -195,7 +194,7 @@ public class Carro implements Serializable {
    * @param ano ano
    * @generated
    */
-  public Carro setAno(Ano ano){
+  public Carro setAno(java.lang.Integer ano){
     this.ano = ano;
     return this;
   }

@@ -5,7 +5,6 @@
         <non-jta-data-source>java:comp/env/jdbc/PostoV21</non-jta-data-source>
         <class>app.entity.Marca</class>
         <class>app.entity.Carro</class>
-        <class>app.entity.Ano</class>
         <class>app.entity.Abastecimento</class>
         <class>app.entity.User</class>
         <class>app.entity.Role</class>

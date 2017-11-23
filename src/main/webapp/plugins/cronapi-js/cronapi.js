@@ -3,12 +3,12 @@
 
   this.cronapi = {};
 
-  this.doEval = function(arg) {
+  this.cronapi.doEval = function(arg) {
     return arg;
   }
 
-  this.evalInContext = function(js) {
-    var result = eval('doEval('+js+')');
+  this.cronapi.evalInContext = function(js) {
+    var result = eval('this.cronapi.doEval('+js+')');
     if (result && result.commands) {
       for (var i=0;i<result.commands.length;i++) {
         var func = eval(result.commands[i].function);
@@ -56,7 +56,7 @@
    * @returns {ObjectType.BOOLEAN}
    */
   this.cronapi.conversion.toBoolean = function(value) {
-    return parseBoolean(value);
+    return this.cronapi.internal.parseBoolean(value);
   };
 
   /**
@@ -96,7 +96,7 @@
    * @returns {ObjectType.STRING}
    */
   this.cronapi.conversion.stringToJs = function(value) {
-    return stringToJs(value);
+    return this.cronapi.internal.stringToJs(value);
   };
 
   /**
@@ -187,7 +187,7 @@
    */
   this.cronapi.util.callServerBlocklyAsync = function(classNameWithMethod, fields, callbackSuccess, callbackError) {
     var serverUrl = 'api/cronapi/call/body/#classNameWithMethod#/'.replace('#classNameWithMethod#', classNameWithMethod);
-    var http = cronapi.$scope.http;
+    var http = this.cronapi.$scope.http;
     var params = [];
     $(arguments).each(function() {
       params.push(this);
@@ -224,45 +224,32 @@
   this.cronapi.util.getScreenFields = function() {
     var fields = {};
 
-    for (var key in cronapi.$scope) {
-      if (cronapi.$scope[key] && cronapi.$scope[key].constructor && cronapi.$scope[key].constructor.name=="DataSet") {
+    for (var key in this.cronapi.$scope) {
+      if (this.cronapi.$scope[key] && this.cronapi.$scope[key].constructor && this.cronapi.$scope[key].constructor.name=="DataSet") {
         fields[key] = {};
-        fields[key].active = cronapi.$scope[key].active;
+        fields[key].active = this.cronapi.$scope[key].active;
       }
     }
 
-    for (var key in cronapi.$scope.vars) {
-      if (cronapi.$scope.vars[key]) {
+    for (var key in this.cronapi.$scope.vars) {
+      if (this.cronapi.$scope.vars[key]) {
         if (!fields.vars) {
           fields.vars = {};
         }
-        fields.vars[key] = cronapi.$scope.vars[key];
+        fields.vars[key] = this.cronapi.$scope.vars[key];
       }
     }
 
-    for (var key in cronapi.$scope.params) {
-      if (cronapi.$scope.params[key]) {
+    for (var key in this.cronapi.$scope.params) {
+      if (this.cronapi.$scope.params[key]) {
         if (!fields.params) {
           fields.params = {};
         }
-        fields.params[key] = cronapi.$scope.params[key];
+        fields.params[key] = this.cronapi.$scope.params[key];
       }
     }
 
     return fields;
-  }
-
-  function getErrorMessage(data, message) {
-    try {
-      var json = JSON.parse(data);
-      if (json && json.error) {
-        return json.error;
-      }
-    } catch(e) {
-      //Abafa
-    }
-
-    return message;
   }
 
   /**
@@ -277,25 +264,22 @@
    * @arbitraryParams true
    */
   this.cronapi.util.makeCallServerBlocklyAsync = function(blocklyWithFunction, callbackSuccess, callbackError) {
-    if (window.event.target && window.event.target) {
-      window.cronapi.$scope = angular.element(window.event.target).scope();
-    }
     
-    var fields = this.getScreenFields();
+    var fields = this.cronapi.util.getScreenFields();
 
     var paramsApply = [];
     paramsApply.push(blocklyWithFunction);
     paramsApply.push(fields);
     paramsApply.push(function(data) {
-      var result = evalInContext(data);
+      var result = this.cronapi.evalInContext(data);
       if (typeof callbackSuccess == "string") {
         eval(callbackSuccess)(result);
       } else if (callbackSuccess) {
         callbackSuccess(result);
       }
-    });
+    }.bind(this));
     paramsApply.push(function(data, status, errorThrown) {
-      var message = getErrorMessage(data.responseText, errorThrown);
+      var message = this.cronapi.internal.getErrorMessage(data.responseText, errorThrown);
       if (typeof callbackError == "string") {
         eval(callbackError)(message);
       }
@@ -303,14 +287,14 @@
         callbackError(message);
       }
       else {
-        cronapi.$scope.Notification.error(message);
+        this.cronapi.$scope.Notification.error(message);
       }
-    });
+    }.bind(this));
     $(arguments).each(function(idx) {
       if (idx >= 3)
         paramsApply.push(this);
     });
-    cronapi.util.callServerBlocklyAsync.apply(this, paramsApply);
+    this.cronapi.util.callServerBlocklyAsync.apply(this, paramsApply);
   };
 
   /**
@@ -324,7 +308,7 @@
    * @wizard procedures_callblockly_callnoreturn
    */
   this.cronapi.util.callServerBlocklyNoReturn = function() {
-    cronapi.util.callServerBlockly.apply(this, arguments);
+    this.cronapi.util.callServerBlockly.apply(this, arguments);
   }
 
   /**
@@ -367,7 +351,7 @@
     var serverUrl = 'api/cronapi/call/body/#classNameWithMethod#/'.replace('#classNameWithMethod#', classNameWithMethod);
     var params = [];
 
-    var fields = this.getScreenFields();
+    var fields = this.cronapi.util.getScreenFields();
 
     var dataCall = {
       "fields": fields,
@@ -399,11 +383,11 @@
       if (resultData.responseJSON)
         result = resultData.responseJSON;
       else
-        result = evalInContext(resultData.responseText);
+        result = this.cronapi.evalInContext(resultData.responseText);
     }
     else {
-      var message = getErrorMessage(resultData.responseText, resultData.statusText);
-      cronapi.$scope.Notification.error(message);
+      var message = this.cronapi.internal.getErrorMessage(resultData.responseText, resultData.statusText);
+      this.cronapi.$scope.Notification.error(message);
       throw message;
     }
     return result;
@@ -507,9 +491,9 @@
    */
   this.cronapi.screen.changeValueOfField = function(/** @type {ObjectType.STRING} @blockType field_from_screen*/ field, /** @type {ObjectType.STRING} */value) {
     try {
-      cronapi.$scope.__tempValue = value;
-      var func = new Function('cronapi.$scope.' + field + ' = cronapi.$scope.__tempValue;');
-      cronapi.$scope.safeApply(func.bind(cronapi.$scope));
+      this.__tempValue = value;
+      var func = new Function('this.' + field + ' = this.__tempValue;');
+      this.safeApply(func.bind(this));
     }
     catch (e) {
       alert(e);
@@ -529,7 +513,7 @@
     try {
       if (field && field.length > 0) {
         if (field.indexOf('vars.') > -1)
-          return eval('cronapi.$scope.'+field);
+          return eval('this.'+field);
         else
           return eval(field);
       }
@@ -549,7 +533,7 @@
    * @param {ObjectType.STRING} value {{createScopeVariableParam1}}
    */
   this.cronapi.screen.createScopeVariable = function(name,value) {
-    cronapi.$scope.vars[name] = value;
+    this.cronapi.$scope.vars[name] = value;
   };
 
   /**
@@ -561,7 +545,7 @@
    * @returns {ObjectType.STRING}
    */
   this.cronapi.screen.getScopeVariable = function(name) {
-    return cronapi.$scope.vars[name];
+    return this.cronapi.$scope.vars[name];
   };
 
   /**
@@ -575,7 +559,7 @@
    * @multilayer true
    */
   this.cronapi.screen.notify = function(/** @type {ObjectType.STRING} */ type, /** @type {ObjectType.STRING} */  message) {
-    cronapi.$scope.Notification({'message':message.toString() },type);
+    this.cronapi.$scope.Notification({'message':message.toString() },type);
   };
 
   /**
@@ -718,7 +702,7 @@
       var template = '#key#=#value#&';
       $(params).each(function(idx) {
         for (var key in this)
-          queryString += template.replace('#key#', Url.encode(key)).replace('#value#', Url.encode(this[key]));
+          queryString += template.replace('#key#', this.cronapi.internal.Url.encode(key)).replace('#value#', this.cronapi.internal.Url.encode(this[key]));
       });
       window.location.hash = view + queryString;
     }
@@ -765,7 +749,7 @@
    */
   this.cronapi.screen.getParam = function(paramName) {
     try {
-      return cronapi.$scope.params[paramName];
+      return this.cronapi.$scope.params[paramName];
     }
     catch (e) {
       alert(e);
@@ -915,7 +899,7 @@
    * @returns {ObjectType.LONG}
    */
   this.cronapi.dateTime.getSecond = function(value) {
-    var date = cronapi.conversion.stringToDate(value);
+    var date = this.cronapi.conversion.stringToDate(value);
     if (date)
       return date.getSeconds();
     return 0;
@@ -930,7 +914,7 @@
    * @returns {ObjectType.LONG}
    */
   this.cronapi.dateTime.getMinute = function(value) {
-    var date = cronapi.conversion.stringToDate(value);
+    var date = this.cronapi.conversion.stringToDate(value);
     if (date)
       return date.getMinutes();
     return 0;
@@ -945,7 +929,7 @@
    * @returns {ObjectType.LONG}
    */
   this.cronapi.dateTime.getHour = function(value) {
-    var date = cronapi.conversion.stringToDate(value);
+    var date = this.cronapi.conversion.stringToDate(value);
     if (date)
       return date.getHours();
     return 0;
@@ -960,7 +944,7 @@
    * @returns {ObjectType.LONG}
    */
   this.cronapi.dateTime.getYear = function(value) {
-    var date = cronapi.conversion.stringToDate(value);
+    var date = this.cronapi.conversion.stringToDate(value);
     if (date)
       return date.getFullYear();
     return 0;
@@ -975,7 +959,7 @@
    * @returns {ObjectType.LONG}
    */
   this.cronapi.dateTime.getMonth = function(value) {
-    var date = cronapi.conversion.stringToDate(value);
+    var date = this.cronapi.conversion.stringToDate(value);
     if (date)
       return date.getMonth() + 1;
     return 0;
@@ -990,7 +974,7 @@
    * @returns {ObjectType.LONG}
    */
   this.cronapi.dateTime.getDay = function(value) {
-    var date = cronapi.conversion.stringToDate(value);
+    var date = this.cronapi.conversion.stringToDate(value);
     if (date)
       return date.getDate();
     return 0;
@@ -1007,8 +991,8 @@
    */
   this.cronapi.dateTime.getDaysBetweenDates = function(date, date2) {
     var DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
-    var dateVar = cronapi.conversion.stringToDate(date);
-    var date2Var = cronapi.conversion.stringToDate(date2);
+    var dateVar = this.cronapi.conversion.stringToDate(date);
+    var date2Var = this.cronapi.conversion.stringToDate(date2);
     var daysBetween = Math.round((dateVar.getTime() - date2Var.getTime())
         / DAY_IN_MILLIS);
     return daysBetween;
@@ -1026,8 +1010,8 @@
   this.cronapi.dateTime.getMonthsBetweenDates = function(date, date2) {
     var monthBetween = 0;
     var yearBetween = 0;
-    var dateVar = cronapi.conversion.stringToDate(date);
-    var date2Var = cronapi.conversion.stringToDate(date2);
+    var dateVar = this.cronapi.conversion.stringToDate(date);
+    var date2Var = this.cronapi.conversion.stringToDate(date2);
     if (dateVar && date2Var) {
       yearBetween = (dateVar.getFullYear() - date2Var.getFullYear()) * 12;
       monthBetween = dateVar.getMonth() - date2Var.getMonth();
@@ -1052,8 +1036,8 @@
    */
   this.cronapi.dateTime.getYearsBetweenDates = function(date, date2) {
     var yearBetween = 0;
-    var dateVar = cronapi.conversion.stringToDate(date);
-    var date2Var = cronapi.conversion.stringToDate(date2);
+    var dateVar = this.cronapi.conversion.stringToDate(date);
+    var date2Var = this.cronapi.conversion.stringToDate(date2);
     if (dateVar && date2Var) {
       yearBetween = (dateVar.getFullYear() - date2Var.getFullYear());
       if (date2Var < dateVar
@@ -1078,7 +1062,7 @@
    * @returns {ObjectType.DATETIME}
    */
   this.cronapi.dateTime.incDay = function(date, day) {
-    var dateVar = cronapi.conversion.stringToDate(date);
+    var dateVar = this.cronapi.conversion.stringToDate(date);
     dateVar.setDate(dateVar.getDate() + day);
     return dateVar;
   };
@@ -1093,7 +1077,7 @@
    * @returns {ObjectType.DATETIME}
    */
   this.cronapi.dateTime.incMonth = function(date, month) {
-    var dateVar = cronapi.conversion.stringToDate(date);
+    var dateVar = this.cronapi.conversion.stringToDate(date);
     dateVar.setMonth(dateVar.getMonth() + month);
     return dateVar;
   };
@@ -1108,7 +1092,7 @@
    * @returns {ObjectType.DATETIME}
    */
   this.cronapi.dateTime.incYear = function(date, year) {
-    var dateVar = cronapi.conversion.stringToDate(date);
+    var dateVar = this.cronapi.conversion.stringToDate(date);
     dateVar.setFullYear(dateVar.getFullYear() + year);
     return dateVar;
   };
@@ -1134,7 +1118,7 @@
    * @returns {ObjectType.STRING}
    */
   this.cronapi.dateTime.formatDateTime = function(date, format) {
-    var dateVar = cronapi.conversion.stringToDate(date);
+    var dateVar = this.cronapi.conversion.stringToDate(date);
     var dd = dateVar.getDate();
     var mm = dateVar.getMonth() + 1;
     var yyyy = dateVar.getFullYear();
@@ -1143,7 +1127,7 @@
     for (var i = 0; i < format.length; i++) {
       if (!maskChars.includes(format.toLowerCase().charAt(i))) {
         separator = format.toLowerCase().charAt(i);
-        var formatLower = replaceAll(format.toLowerCase(), separator, '+separator+');
+        var formatLower = this.cronapi.internal.replaceAll(format.toLowerCase(), separator, '+separator+');
         return eval(formatLower);
       }
     }
@@ -1546,14 +1530,14 @@
     * @displayInline true
    */
    this.cronapi.logic.isNullOrEmpty = function(/** @type {ObjectType.OBJECT} @description */ value) {
-     return (cronapi.logic.isNull(value) || cronapi.logic.isEmpty(value));
+     return (this.cronapi.logic.isNull(value) || this.cronapi.logic.isEmpty(value));
    }
   
   this.cronapi.i18n = {};
 
   this.cronapi.i18n.translate = function(value , params) {
     if (value) {
-      var text = cronapi.$translate.instant(value);
+      var text = this.cronapi.$translate.instant(value);
       for (var i = 0; i < params.length; i++){
         var param = params[i];
         if (param != null && typeof param != "undefined") {
@@ -1569,14 +1553,13 @@
   this.cronapi.internal = {};
   
   this.cronapi.internal.setFile = function(field, file) {
-    cronapi.internal.fileToBase64(file, function(base64) { cronapi.screen.changeValueOfField(field, base64); });
+    this.cronapi.internal.fileToBase64(file, function(base64) { this.cronapi.screen.changeValueOfField(field, base64); }.bind(this));
   };
   
   this.cronapi.internal.fileToBase64 = function(file, cb) {
       var fileReader = new FileReader();
       fileReader.readAsDataURL(file);
       fileReader.onload = function(e) {
-          debugger;
           var base64Data = e.target.result.substr(e.target.result.indexOf('base64,') + 'base64,'.length);
           cb(base64Data);
       };
@@ -1652,18 +1635,18 @@
              if (streaming!= null && streaming.getTracks().length > 0)
                 streaming.getTracks()[0].stop();
              $(cronapiVideoCapture).remove();
-          });
+          }.bind(this));
         
           cronapiVideoCapture.find('#cronapiVideoCaptureOk').on('click',function() {
-             cronapi.internal.captureFromCamera(field, res.width, res.height);
+             this.cronapi.internal.captureFromCamera(field, res.width, res.height);
              if (streaming!= null && streaming.getTracks().length > 0)
                 streaming.getTracks()[0].stop();
              $(cronapiVideoCapture).remove();
-          });
+          }.bind(this));
           
           videoDOM.src = window.URL.createObjectURL(stream);
           videoDOM.play();
-        });
+        }.bind(this));
     }
   }; 
    
@@ -1675,7 +1658,7 @@
     var videoDOM = document.getElementById('cronapiVideoCapture');
 		context.drawImage(videoDOM, 0, 0, width, height);
 		var base64 = canvas.toDataURL().substr(22);
-		cronapi.screen.changeValueOfField(field, base64);
+		this.cronapi.screen.changeValueOfField(field, base64);
   };
   
   this.cronapi.internal.castBase64ToByteArray = function(base64) {
@@ -1701,7 +1684,7 @@
     catch (e) {
       try {
         //Tenta pegar do header
-        json = JSON.parse(cronapi.internal.castByteArrayToString(cronapi.internal.castBase64ToByteArray(data)))
+        json = JSON.parse(this.cronapi.internal.castByteArrayToString(this.cronapi.internal.castBase64ToByteArray(data)))
       }
       catch (e) {
         //Verifica se é drpobox
@@ -1777,7 +1760,7 @@
       url += '/' + field;
       var _u = JSON.parse(sessionStorage.getItem('_u'));
       var object = itemActive;
-      this.$promise = cronapi.$scope.$http({
+      this.$promise = this.cronapi.$scope.$http({
           method: 'POST',
           url: (window.hostApp || "") + url,
           data: (object) ? JSON.stringify(object) : null,
@@ -1808,9 +1791,9 @@
             console.log('Error downloading file');
             console.log(ex);
           }
-      }).error(function(data, status, headers, config) {
+      }.bind(this)).error(function(data, status, headers, config) {
           console.log('Error downloading file');
-      });
+      }.bind(this));
     }
     
   };
@@ -1820,7 +1803,7 @@
     var formData = new FormData();
     formData.append("file", file);
     var _u = JSON.parse(sessionStorage.getItem('_u'));
-    this.$promise = cronapi.$scope.$http({
+    this.$promise = this.cronapi.$scope.$http({
         method: 'POST',
         url: (window.hostApp || "") + uploadUrl,
         data: formData,
@@ -1838,10 +1821,10 @@
           }
 				}
     }).success(function(data, status, headers, config) {
-        cronapi.screen.changeValueOfField(field, data.jsonString);
-    }).error(function(data, status, headers, config) {
+        this.cronapi.screen.changeValueOfField(field, data.jsonString);
+    }.bind(this)).error(function(data, status, headers, config) {
         alert('Error uploading file');
-    });
+    }.bind(this));
   };
   
   /**
@@ -1965,6 +1948,40 @@
      navigator.camera.getPicture(success, error, { destinationType: destinationType , sourceType : pictureSourceType });
    };
    
+    /**
+     * @type function
+     * @platform M
+     * @name {{qrCodeScanner}}
+     * @nameTags QRCODE|QR|BAR|Scanner|BARCODE
+     * @param {ObjectType.STRING} format {{formatQRCode}}
+     * @param {ObjectType.STRING} message {{messageQRCode}}
+     * @description {{qrCodeScannerDescription}}
+     * @returns {ObjectType.VOID}
+    */
+   this.cronapi.cordova.camera.qrCodeScanner = function(/** @type {ObjectType.STRING} @description {{formatQRCode}} @blockType util_dropdown @keys QR_CODE|DATA_MATRIX|UPC_A|UPC_E|EAN_8|EAN_13|CODE_39|CODE_128 @values QR_CODE|DATA_MATRIX|UPC_A|UPC_E|EAN_8|EAN_13|CODE_39|CODE_128  */  format,/** @type {ObjectType.STRING} @description {{messageQRCode}} */ message, /** @type {ObjectType.STATEMENTSENDER} @description {{success}} */ success, /** @type {ObjectType.STATEMENTSENDER} @description {{error}} */  error ) {
+    cordova.plugins.barcodeScanner.scan(
+	  function (result) {
+		  success(result.text);
+	  },
+	  function (errorMsg) {
+		  error(errorMsg);
+	  },
+	  {
+		  preferFrontCamera : false, 
+		  showFlipCameraButton : true, 
+		  showTorchButton : true, 
+		  torchOn: true, 
+		  saveHistory: true, 
+		  prompt : message, 
+		  resultDisplayDuration: 500, 
+		  formats : format, 
+		  orientation : "portrait", 
+		  disableAnimations : true, 
+		  disableSuccessBeep: false 
+	  }
+	);
+   };
+   
    
     this.cronapi.cordova.file = {};
    
@@ -2009,8 +2026,8 @@
           fileEntry.remove(function (entry) { 
           if (success)
             success(entry);
-          },error);
-        },error);
+          }.bind(this),error);
+        }.bind(this),error);
      };
    
      /**
@@ -2032,8 +2049,8 @@
                 success(this.result);
             };
             reader.readAsText(file);
-          },error);
-        },error);
+          }.bind(this),error);
+        }.bind(this),error);
      };
    
      /**
@@ -2066,11 +2083,11 @@
               if (success) {
                 setTimeout(function() {
                   success();   
-                },500);
+                }.bind(this),500);
               }
-           }, error);
-        }, error);
-    }, error);
+           }.bind(this), error);
+        }.bind(this), error);
+    }.bind(this), error);
    };
    
       /**
@@ -2090,8 +2107,8 @@
           parentEntry.getDirectory(dirChildrenName, { create: true }, function (childrenEntry) {
             if (success)
                 success(childrenEntry);
-          },error);
-        }, error);
+          }.bind(this),error);
+        }.bind(this), error);
      };
 
       this.cronapi.cordova.storage = {}; 
@@ -2231,7 +2248,7 @@
      
      
   //Private variables and functions
-  var ptDate = function(varray) {
+  this.cronapi.internal.ptDate = function(varray) {
     var date;
     var day = varray[1];
     var month = varray[2];
@@ -2246,7 +2263,7 @@
     return date;
   };
 
-  var enDate = function(varray) {
+  this.cronapi.internal.enDate = function(varray) {
     var date;
     var month = varray[1];
     var day = varray[2];
@@ -2261,7 +2278,7 @@
     return date;
   };
 
-  var parseBoolean = function(value) {
+  this.cronapi.internal.parseBoolean = function(value) {
     if (!value)
       return false;
     if (typeof value == "boolean")
@@ -2270,7 +2287,7 @@
     return value == "1" || value == "true";
   };
 
-  var removeAccents = function(value) {
+  this.cronapi.internal.removeAccents = function(value) {
     withAccents = 'áàãâäéèêëíìîïóòõôöúùûüçÁÀÃÂÄÉÈÊËÍÌÎÏÓÒÕÖÔÚÙÛÜÇ';
     withoutAccents = 'aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC';
     newValue = '';
@@ -2285,14 +2302,14 @@
     return newValue;
   };
 
-  var arrayRemove = function(array, value) {
-    var i = arrayIndexOf(array, value);
+  this.cronapi.internal.arrayRemove = function(array, value) {
+    var i = this.cronapi.internal.arrayIndexOf(array, value);
     if (i != -1) {
       array.splice(i, 1);
     }
   };
 
-  var arrayIndexOf = function(array, value) {
+  this.cronapi.internal.arrayIndexOf = function(array, value) {
     var index = -1;
     $(array).each(function(idx) {
       if (value == this) {
@@ -2302,15 +2319,15 @@
     return index;
   };
 
-  var replaceAll = function(str, value, newValue) {
+  this.cronapi.internal.replaceAll = function(str, value, newValue) {
     return str.toString().split(value).join(newValue);
   };
 
-  var getWindowHeight = function() {
+  this.cronapi.internal.getWindowHeight = function() {
     $(window).height();
   };
 
-  var getWindowWidth = function() {
+  this.cronapi.internal.getWindowWidth = function() {
     $(window).width();
   };
 
@@ -2321,7 +2338,7 @@
    *
    **/
 
-  var Url = {
+  this.cronapi.internal.Url = {
     // public method for url encoding
     encode : function (string) {
       if (string)
@@ -2382,8 +2399,21 @@
     }
   };
 
-  var stringToJs = function(str) {
+  this.cronapi.internal.stringToJs = function(str) {
     return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+  };
+  
+  this.cronapi.internal.getErrorMessage = function(data, message) {
+    try {
+      var json = JSON.parse(data);
+      if (json && json.error) {
+        return json.error;
+      }
+    } catch(e) {
+      //Abafa
+    }
+
+    return message;
   };
 
 }).bind(window)();
