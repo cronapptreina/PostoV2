@@ -14,7 +14,7 @@
       "id": "paperCell",
       "runtimeClass": "cronos.widgets.joint.uml.Paper",
       "z": 1,
-      "dataSource": "jdbc/PostoV21",
+      "dataSource": "jdbc/main",
       "namespace": "app",
       "apiPath": "src/main/webapp/raml/app/api.raml",
       "restPath": "/api/rest",
@@ -1302,8 +1302,8 @@
       ],
       "methods": [],
       "position": {
-        "x": 740,
-        "y": 8
+        "x": 671,
+        "y": 5
       },
       "size": {
         "width": 187.015625,
@@ -1335,7 +1335,7 @@
           "isPrimaryKey": true,
           "isUniqueKey": false,
           "isNullable": false,
-          "pkType": "Identity",
+          "pkType": "None",
           "multitenantContext": "",
           "jsonIgnore": false,
           "isTransient": false,
@@ -1419,7 +1419,7 @@
       ],
       "methods": [],
       "position": {
-        "x": 743,
+        "x": 674,
         "y": 132
       },
       "size": {
@@ -1452,7 +1452,7 @@
           "isPrimaryKey": true,
           "isUniqueKey": false,
           "isNullable": false,
-          "pkType": "Identity",
+          "pkType": "None",
           "multitenantContext": "",
           "jsonIgnore": false,
           "isTransient": false,

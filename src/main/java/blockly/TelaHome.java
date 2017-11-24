@@ -24,7 +24,7 @@ public class TelaHome {
 						Var.valueOf("name", cronapi.screen.Operations.getValueOfField(Var.valueOf("vars.name"))),
 						Var.valueOf("picture", cronapi.screen.Operations.getValueOfField(Var.valueOf("vars.foto"))),
 						Var.valueOf("login", cronapi.util.Operations.getCurrentUserName()));
-				cronapi.util.Operations.callClientFunction(Var.valueOf("cronapi.screen.notify"), Var.valueOf("success"),
+				cronapi.util.Operations.callClientFunction(Var.valueOf("cronapi.screen.notify"), Var.valueOf("info"),
 						Var.valueOf("Perfil alterado!"));
 				return Var.VAR_NULL;
 			}

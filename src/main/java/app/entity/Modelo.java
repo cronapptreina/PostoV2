@@ -30,7 +30,6 @@ public class Modelo implements Serializable {
    * @generated
    */
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id", nullable = false, insertable=true, updatable=true)
   private java.lang.Integer id;
 

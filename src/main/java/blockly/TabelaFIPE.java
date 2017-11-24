@@ -19,7 +19,6 @@ public class TabelaFIPE {
 		return new Callable<Var>() {
 
 			private Var marcaO = Var.VAR_NULL;
-			private Var marcaJson = Var.VAR_NULL;
 			private Var marcaId = Var.VAR_NULL;
 			private Var url = Var.VAR_NULL;
 			private Var consultamodelos = Var.VAR_NULL;
@@ -55,7 +54,6 @@ public class TabelaFIPE {
 	public static Var modelos(Var marcaO) throws Exception {
 		return new Callable<Var>() {
 
-			private Var marcaJson = Var.VAR_NULL;
 			private Var marcaId = Var.VAR_NULL;
 			private Var url = Var.VAR_NULL;
 			private Var consultamodelos = Var.VAR_NULL;
@@ -63,10 +61,8 @@ public class TabelaFIPE {
 
 			public Var call() throws Exception {
 				System.out.println(marcaO.getObjectAsString());
-				marcaJson = cronapi.json.Operations.getJsonOrMapField(cronapi.json.Operations.toJson(marcaO),
-						Var.valueOf("fipe_name"));
-				System.out.println(marcaJson.getObjectAsString());
-				marcaId = cronapi.json.Operations.getJsonOrMapField(marcaJson, Var.valueOf("id"));
+				marcaId = cronapi.json.Operations.getJsonOrMapField(cronapi.json.Operations.toJson(marcaO),
+						Var.valueOf("id"));
 				System.out.println(marcaId.getObjectAsString());
 				try {
 					url = Var.valueOf(Var.valueOf("http://fipeapi.appspot.com/api/1/carros/veiculos/").toString()
